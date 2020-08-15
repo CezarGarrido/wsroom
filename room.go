@@ -111,13 +111,13 @@ func (r *Room) BroadcastEx(senderid int, msg []byte) {
 func (r *Room) HandleMsg(id int) {
 	for {
 
-		r.mu.Lock()
+		//r.mu.Lock()
 
 		if r.clients[id] == nil {
 			break
 		}
 
-		r.mu.Unlock()
+		//r.mu.Unlock()
 
 		r.mu.Lock()
 

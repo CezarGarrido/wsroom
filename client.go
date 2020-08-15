@@ -2,9 +2,10 @@ package wsroom
 
 import (
 	"encoding/json"
-	"github.com/gorilla/websocket"
 	"log"
 	"sync"
+
+	"github.com/gorilla/websocket"
 )
 
 /* To figure out if they wanna broadcast to all or broadcast to all except them */
@@ -40,10 +41,13 @@ func (c *Client) ReadLoop() {
 			break
 		}
 		//log.Println(string(message))
-		// if _, _, err := c.conn.NextReader(); err != nil {
-		// 	break
-		// }
-		c.out <- message
+		if _, _, err := c.conn.NextReader(); err != nil {
+			break
+		}
+		select {
+		case c.out <- message:
+		default:
+		}
 	}
 }
 
