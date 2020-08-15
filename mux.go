@@ -12,7 +12,7 @@ func HandleFunc(pattern string, handler WsHandler) {
 func ExecFunction(pattern string, r *Room, m Message) {
 	callFunction, ok := Routes[pattern]
 	if ok {
-		 callFunction(r, m)
+		callFunction(r, m)
 	}
 }
 
