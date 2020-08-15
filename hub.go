@@ -1,16 +1,19 @@
 package wsroom
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
+	"sync"
+
+	"github.com/gorilla/mux"
+	"github.com/gorilla/websocket"
 )
 
 /* Controls a bunch of rooms */
 type Hub struct {
 	hub      map[string]*Room
 	upgrader websocket.Upgrader
+	mu       sync.Mutex
 }
 
 /* If room doesn't exist creates it then returns it */
